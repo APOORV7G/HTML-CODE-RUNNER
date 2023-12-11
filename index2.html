@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/lib/codemirror.css">
+
+    <!-- Include CodeMirror JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/lib/codemirror.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/mode/xml/xml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/mode/javascript/javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/mode/css/css.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/mode/clike/clike.js"></script>
+
+    <!-- Include CodeMirror theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/material.css">
+
+    <title>Main Page</title>
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+            height: 100vh;
+            background-color: black;
+            margin: 0rem;
+            overflow: hidden;
+        }
+
+        .header {
+            color: white;
+            font-size: 24px;
+            padding: 0px;
+            margin: 0%;
+            position: absolute;
+            left: 0%;
+            top: 0%;
+            overflow: hidden;
+            font-size: larger;
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(3rem, 10vw, 10rem);
+            font-style: normal;
+            text-shadow: 0 0 5px #ffffff;
+            user-select: none;
+            padding: 0rem clamp(1rem, 2vw, 3rem);
+            border-radius: clamp(0.4rem, 0.75vw, 1rem);
+        }
+        
+        .background {
+            background-image: url('img1.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            filter: blur(1.99px);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: -1;
+        }
+        .code {
+            width: 66%;
+            height: 70%;
+            overflow: hidden;
+            position: absolute;
+            left: 2%;
+            top: 20%;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            box-shadow:  
+                0 5px 0 0 #ff0080,  /* Top shadow */
+                0 -5px 0 0 #247c97,  /* Bottom shadow */
+                5px 0 0 0 #ff8400,  /* Right shadow */
+                -5px 0 0 0 rgb(223, 186, 0);  /* Left shadow */
+        }
+
+        .CodeMirror {
+            height: 100%;
+            background-color: black;
+        }
+
+        .but > * {   
+            overflow: hidden;
+            position: absolute;
+            left: 75%;
+            color: rgb(255, 255, 255);
+            font-style: normal;
+            text-shadow: 0 0 5px #ffffff;
+            font-size: 32px;
+            user-select: none;
+        }
+
+        button {
+            background-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            border-top-color: transparent;
+            border-bottom-right-radius: 20px;
+            border-top-right-radius: 20px;
+            display: flex;
+        }
+
+        button:hover {
+            background-color: transparent;
+            box-shadow: 0 5px  #ff0080 , 0 -5px  #247c97;
+            transform: translateY(4px);
+        }
+
+        button:active {
+            background-color: transparent;
+            box-shadow: 0 5px  rgb(215, 127, 11) , 0 -5px  rgba(195, 169, 0, 0.676);
+            transform: translateY(4px);
+        }
+
+        .home {
+            overflow: hidden;
+            position: absolute;
+            left: 75%;
+            top: 60%;
+            color: rgb(255, 255, 255);
+            font-style: normal;
+            text-shadow: 0 0 5px #ffffff;
+            font-size: 32px;
+            user-select: none;
+        }
+        footer{
+            top: 95%;
+            position:absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <p data-value="HTML CODE RUNNER" class="header"> 
+        HTML CODE RUNNER
+    </p>
+
+    <div class="but">
+        <button id="run">
+            Let's Go!
+        </button>
+        <button class="home" onclick="handleButtonClick2()">
+            Home Page
+        </button>
+    </div>
+    <div class="code">
+        <textarea id="codeEditor" placeholder="Write your Code here..."></textarea>
+    </div>
+    <footer style="text-align: center; color: white; text-shadow: 0 0 5px#ffffff; font-size: 20px;"> 
+        Developed by Apoorv and Brinda</footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
+                lineNumbers: true,
+                mode: 'htmlmixed',
+                theme: 'material'
+            });
+            const audio2 = new Audio('bg_but.mp3');
+            function handleButtonClick() {
+            audio2.play();
+            const outputContent = editor.getValue();
+
+            // Open a new window and write the output content
+            const newWindow = window.open();
+            newWindow.document.write(outputContent);
+        }
+        document.getElementById('run').addEventListener('click', handleButtonClick);
+        });
+
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.1234567890";
+        let interval = null;
+        const audio = new Audio('bg_audio.mp3');
+
+        const contentDiv = document.querySelector('.content');
+
+        document.querySelector("p").onmouseover = event => {  
+            audio.play();
+            let iteration = 0;
+            clearInterval(interval);
+
+            interval = setInterval(() => {
+                event.target.innerText = event.target.innerText
+                .split("")
+                .map((letter, index) => {
+                    if(index < iteration) {
+                        return event.target.dataset.value[index];
+                    }
+
+                    return letters[Math.floor(Math.random() * 26)]
+                    })
+                    .join("");
+
+                if(iteration >= event.target.dataset.value.length){ 
+                    clearInterval(interval);
+                }
+
+                iteration += 1 / 5;
+                }, 30);
+            };
+
+
+            const audio2 = new Audio('bg_but.mp3');
+            function handleButtonClick2() {
+                console.log("Button clicked!");
+            audio2.play();
+            setTimeout(function() {
+                window.open("index.html", "_self");
+            }, 450);
+        }
+
+    </script>
+</body>
+</html>
