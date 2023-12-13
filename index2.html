@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/lib/codemirror.css">
 
     <!-- Include CodeMirror JavaScript -->
+    <!-- Copyright (C) 2017 by Marijn Haverbeke <marijn@haverbeke.berlin> and others -->
+    <!-- Include CodeMirror JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/lib/codemirror.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/mode/htmlmixed/htmlmixed.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/mode/xml/xml.js"></script>
@@ -19,7 +21,9 @@
 
     <title>Main Page</title>
     <style>
-        body {
+        /*
+        The Understanding of this css can be taken from the index.html file*/
+        body { 
             display: grid;
             place-items: center;
             height: 100vh;
@@ -63,7 +67,7 @@
             height: 70%;
             overflow: hidden;
             position: absolute;
-            left: 2%;
+            left: 2%; /* when using position: absolute we use left , right , top , bottom to allign the items in a website*/
             top: 20%;
             border-radius: 10px;
             background-color: rgba(0, 0, 0, 0.7);
@@ -77,7 +81,7 @@
 
         .CodeMirror {
             height: 100%;
-            background-color: black;
+           
         }
 
         .but > * {   
@@ -151,24 +155,24 @@
     <footer style="text-align: center; color: white; text-shadow: 0 0 5px#ffffff; font-size: 20px;"> 
         Developed by Apoorv and Brinda</footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {// we wait until the DOM content is loaded from the host
             var editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
                 lineNumbers: true,
                 mode: 'htmlmixed',
                 theme: 'material'
-            });
+            });// create a new editor which is in htmlmixed 
             const audio2 = new Audio('bg_but.mp3');
             function handleButtonClick() {
             audio2.play();
-            const outputContent = editor.getValue();
+            const outputContent = editor.getValue();//we will get html text here 
 
             // Open a new window and write the output content
-            const newWindow = window.open();
-            newWindow.document.write(outputContent);
+            const newWindow = window.open();// open a new window
+            newWindow.document.write(outputContent);// write html content there
         }
-        document.getElementById('run').addEventListener('click', handleButtonClick);
+        document.getElementById('run').addEventListener('click', handleButtonClick);// when the button is clicked call the function handleButtonClick
         });
-
+        // the understadning of the below code can be taken from index.html
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.1234567890";
         let interval = null;
         const audio = new Audio('bg_audio.mp3');

@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            display: grid;
-            place-items: center;
-            height: 100vh;
+            display: grid;  /* Grid style to make it easier*/
+            place-items: center; /* All components will be placed in center*/
+            height: 100vh; /* height is 100 % of the view port*/
             background-color: black;
-            margin: 0rem;
-            overflow: hidden;
+            margin: 0rem; /* no margin cause we will be using blur*/
+            overflow: hidden; /* over flow hidden so that stuff which goes beyond the boundary can be neglected */
         }
-
+        /* style for paragraph tag*/
         p {
             font-family: 'Space Mono', monospace;
             font-size: clamp(3rem, 10vw, 10rem);
@@ -24,22 +24,22 @@
         .background {
             background-image: url('img1.png');
             background-repeat: no-repeat;
-            background-size: cover;
-            overflow: hidden;
-            filter: blur(1.99px); /* Adjust the blur value to your preference */
+            background-size: cover; /* image should fit any size port*/
+            overflow: hidden; 
+            filter: blur(1.99px); 
             width: 100%;
             height: 100%;
             position: absolute;
-            z-index: -1;
+            z-index: -1; /* Pushing the image to the back of the view port*/
         }
-
+        /* style for content class */
         .content {
             font-style: normal;
-            text-shadow: 0 0 5px #ffffff;
+            text-shadow: 0 0 5px #ffffff; /* thing which does magic*/
             font-size: 32px;
-            user-select: none;
+            user-select: none; /* So that user can't select text*/
         }
-
+        /* style for all teh children of but class */
         .but > * {   
             color: rgb(255, 255, 255);
             font-style: normal;
@@ -47,7 +47,7 @@
             font-size: 32px;
             user-select: none;
         }
-
+        /* style for button tag */
         button {
             background-color: transparent;
             border-left-color: transparent;
@@ -62,11 +62,11 @@
             box-shadow: 0 5px  #ff0080 , 0 -5px  #247c97;
             transform: translateY(4px);
         }
-
+        
         button:active {
             background-color: transparent;
             box-shadow: 0 5px  rgb(215, 127, 11) , 0 -5px  rgba(195, 169, 0, 0.676);
-            transform: translateY(4px);
+            transform: translateY(4px); /* Little transition*/
         }
     </style>
     <title>Home Page</title>
@@ -86,43 +86,43 @@
     <footer style="text-align: center; color: white; text-shadow: 0 0 5px#ffffff; font-size: 20px;"> 
         Developed by Apoorv and Brinda</footer>
     <script>
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.1234567890";
-        let interval = null;
-        const audio = new Audio('bg_audio.mp3');
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.1234567890"; // random characters you want to display
+        let interval = null; //currently null
+        const audio = new Audio('bg_audio.mp3'); // audio to be played 
         const contentDiv = document.querySelector('.content');
 
-        document.querySelector("p").onmouseover = event => {  
-            audio.play();
-            let iteration = 0;
-            clearInterval(interval);
+        document.querySelector("p").onmouseover = event => {  //main function
+            audio.play(); // play the audio
+            let iteration = 0; 
+            clearInterval(interval); // stop the execution of code that was in setInterval
 
             interval = setInterval(() => {
                 event.target.innerText = event.target.innerText
-                    .split("")
-                    .map((letter, index) => {
-                        if(index < iteration) {
-                            return event.target.dataset.value[index];
+                    .split("")//split the words
+                    .map((letter, index) => { //map every letter to index
+                        if(index < iteration) { // if running first time then all random , if second time then the first character is set to its true value
+                            return event.target.dataset.value[index];// is accessing the data-value attribute of the HTML element that triggered the event 
                         }
 
-                        return letters[Math.floor(Math.random() * 26)]
+                        return letters[Math.floor(Math.random() * 37)]//this will give a random value to the each character i.e returns one character from the letters string.
                     })
-                    .join("");
+                    .join("");// this will eventually join the all the characters to create the word
 
                 if(iteration >= event.target.dataset.value.length){ 
-                    clearInterval(interval);
+                    clearInterval(interval); // stop the execution of code that was in setInterval
                 }
 
-                iteration += 1 / 5;
-            }, 30);
+                iteration += 1 / 5;// setting the speed of getting the right character
+            }, 30);//this will run 30 milliseconds every iteration
         };
 
         function handleButtonClick() {
             console.log("Button clicked!");
 
             const audio2 = new Audio('bg_but.mp3');
-            audio2.play();
+            audio2.play(); // play second audio
             setTimeout(function() {
-                window.open("index2.html", "_self");
+                window.open("index2.html", "_self");//open the next html file after 450 milliseconds so that we can finsish playing the audio
             }, 450);
         }
     </script>
