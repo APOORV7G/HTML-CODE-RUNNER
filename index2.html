@@ -93,6 +93,7 @@
             text-shadow: 0 0 5px #ffffff;
             font-size: 32px;
             user-select: none;
+            cursor: pointer;
         }
 
         button {
@@ -130,7 +131,8 @@
         }
         footer{
             top: 95%;
-            position:absolute;
+            position:absolute; 
+            user-select: none;
         }
     </style>
 </head>
@@ -172,7 +174,7 @@
         }
         document.getElementById('run').addEventListener('click', handleButtonClick);// when the button is clicked call the function handleButtonClick
         });
-        // the understadning of the below code can be taken from index.html
+        // the understanding of the below code can be taken from index.html
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.1234567890";
         let interval = null;
         const audio = new Audio('bg_audio.mp3');
@@ -203,7 +205,6 @@
                 iteration += 1 / 5;
                 }, 30);
             };
-
 
             const audio2 = new Audio('bg_but.mp3');
             function handleButtonClick2() {
