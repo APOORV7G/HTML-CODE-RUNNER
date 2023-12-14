@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/lib/codemirror.css">
 
     <!-- Include CodeMirror JavaScript -->
-    <!-- Copyright (C) 2017 by Marijn Haverbeke <marijn@haverbeke.berlin> and others -->
-    <!-- Include CodeMirror JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/lib/codemirror.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/mode/htmlmixed/htmlmixed.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/mode/xml/xml.js"></script>
@@ -17,13 +15,20 @@
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/mode/clike/clike.js"></script>
 
     <!-- Include CodeMirror theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/lib/codemirror.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/material.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/3024-day.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/3024-night.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/ambiance.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/base16-dark.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/base16-light.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/bespin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/blackboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/cobalt.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.64.0/theme/erlang-dark.css">
     <title>Main Page</title>
     <style>
-        /*
-        The Understanding of this css can be taken from the index.html file*/
-        body { 
+        body {
             display: grid;
             place-items: center;
             height: 100vh;
@@ -50,7 +55,14 @@
             padding: 0rem clamp(1rem, 2vw, 3rem);
             border-radius: clamp(0.4rem, 0.75vw, 1rem);
         }
-        
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+
         .background {
             background-image: url('img1.png');
             background-repeat: no-repeat;
@@ -67,7 +79,7 @@
             height: 70%;
             overflow: hidden;
             position: absolute;
-            left: 2%; /* when using position: absolute we use left , right , top , bottom to allign the items in a website*/
+            left: 2%;
             top: 20%;
             border-radius: 10px;
             background-color: rgba(0, 0, 0, 0.7);
@@ -81,7 +93,7 @@
 
         .CodeMirror {
             height: 100%;
-           
+            background-color: black;
         }
 
         .but > * {   
@@ -93,7 +105,6 @@
             text-shadow: 0 0 5px #ffffff;
             font-size: 32px;
             user-select: none;
-            cursor: pointer;
         }
 
         button {
@@ -131,8 +142,45 @@
         }
         footer{
             top: 95%;
-            position:absolute; 
+            position:absolute;
+        }
+        .theme-dropdown {
+            position: absolute;
+            top: 20%;
+            left: 75%;
+            margin-top: 10px;
+            color: white;
+            color: rgb(255, 255, 255);
+            font-style: normal;
+            text-shadow: 0 0 5px #ffffff;
+            font-size: 32px;
             user-select: none;
+            
+        }
+
+        .theme-label {
+            font-size: 28px;
+            margin-right: 8px;
+        }
+
+        .theme-select {
+            padding: 5px;
+            font-size: 14px;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: 1px solid white;
+            outline: none;
+            color: rgb(255, 255, 255);
+            font-style: normal;
+            text-shadow: 0 0 5px #ffffff;
+            font-size: 24px;
+            user-select: none;
+            box-shadow:  
+                0 5px 0 0 #ff0080,  /* Top shadow */
+                0 -5px 0 0 #247c97,  /* Bottom shadow */
+                5px 0 0 0 #ff8400,  /* Right shadow */
+                -5px 0 0 0 rgb(223, 186, 0);  /* Left shadow */
         }
     </style>
 </head>
@@ -154,27 +202,47 @@
     <div class="code">
         <textarea id="codeEditor" placeholder="Write your Code here..."></textarea>
     </div>
+    <div class="theme-dropdown">
+        <label for="themeSelect" class="theme-label">Select Theme:</label>
+        <select id="themeSelect" class="theme-select">
+            <option value="material">Material</option>
+            <option value="3024-day">3024 Day</option>
+            <option value="3024-night">3024 Night</option>
+            <option value="ambiance">Ambiance</option>
+            <option value="base16-dark">Base16 Dark</option>
+            <option value="base16-light">Base16 Light</option>
+            <option value="bespin">Bespin</option>
+            <option value="blackboard">Blackboard</option>
+            <option value="cobalt">Cobalt</option>
+            <option value="erlang-dark">Erlang Dark</option>
+        </select>
+    </div>    
     <footer style="text-align: center; color: white; text-shadow: 0 0 5px#ffffff; font-size: 20px;"> 
         Developed by Apoorv and Brinda</footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {// we wait until the DOM content is loaded from the host
+        document.addEventListener('DOMContentLoaded', function() {
             var editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
                 lineNumbers: true,
                 mode: 'htmlmixed',
                 theme: 'material'
-            });// create a new editor which is in htmlmixed 
+            });
+            document.getElementById('themeSelect').addEventListener('change', function () {
+                var selectedTheme = this.value;
+                editor.setOption('theme', selectedTheme);//selecting the theme.
+            });
+
             const audio2 = new Audio('bg_but.mp3');
             function handleButtonClick() {
             audio2.play();
-            const outputContent = editor.getValue();//we will get html text here 
+            const outputContent = editor.getValue();
 
             // Open a new window and write the output content
-            const newWindow = window.open();// open a new window
-            newWindow.document.write(outputContent);// write html content there
+            const newWindow = window.open();
+            newWindow.document.write(outputContent);
         }
-        document.getElementById('run').addEventListener('click', handleButtonClick);// when the button is clicked call the function handleButtonClick
+        document.getElementById('run').addEventListener('click', handleButtonClick);
         });
-        // the understanding of the below code can be taken from index.html
+
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.1234567890";
         let interval = null;
         const audio = new Audio('bg_audio.mp3');
